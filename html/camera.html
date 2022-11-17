@@ -9,6 +9,21 @@
 	</head>
 	<body>
 		担当あっちゃん
+
+		<h1>HTML5カメラ</h1>
+
+		<video id="camera" width="300" height="200"></video>
+		<canvas id="picture" width="300" height="200"></canvas>
+		<form>
+			<button type="button" id="shutter">シャッター</button>
+		</form>
+
+		<audio id="se" preload="auto">
+			<source src="camera-shutter1.mp3" type="audio/mp3" />
+		</audio>
+
+		<div id="result"></div>
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="./../js/camera.js"></script>
 	</body>
