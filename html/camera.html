@@ -18,11 +18,16 @@
 			<button type="button" id="shutter">シャッター</button>
 		</form>
 
-		<audio id="se" preload="auto">
+		<!-- <audio id="se" preload="auto">
 			<source src="camera-shutter1.mp3" type="audio/mp3" />
-		</audio>
+		</audio> -->
 
 		<div id="result"></div>
+
+		<form action="./tensor.html" method="GET">
+			<input type="text" name="cameraData" id="imageData" />
+			<input type="submit" value="送信" />
+		</form>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="./../js/camera.js"></script>

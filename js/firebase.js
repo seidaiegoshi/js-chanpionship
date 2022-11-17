@@ -33,3 +33,20 @@ $("#date_came").on("click", function () {
 		time: "bbbbbb",
 	});
 });
+
+// 受信処理
+window.onload = function () {
+	// URLを取得
+	const url = new URL(window.location.href);
+
+	// URLSearchParamsオブジェクトを取得
+	const params = url.searchParams;
+
+	// consoleに受け取ったパラメータを出力
+	console.log(params);
+
+	// パラメータから「cameraData」を取得
+	const label = params.get("sendLabel");
+	console.log(label);
+	$("#label_name").val(label);
+};

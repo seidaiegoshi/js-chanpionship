@@ -1,4 +1,26 @@
-const img = document.getElementById("img");
+let img = new Image();
+
+// 受信処理
+window.onload = function () {
+	// URLを取得
+	const url = new URL(window.location.href);
+
+	// URLSearchParamsオブジェクトを取得
+	const params = url.searchParams;
+
+	// consoleに受け取ったパラメータを出力
+	console.log(params);
+
+	// パラメータから「cameraData」を取得
+	const image = params.get("cameraData");
+	console.log(image);
+	$("#img").attr("src", image);
+
+	img.src = image;
+};
+
+// const img = document.getElementById("img");
+console.log(img);
 
 // Load the model.
 // 機械学習モデルのロードが完了したら、
@@ -30,6 +52,7 @@ function splitClassNamesToArray(arr) {
 
 // 配列の各要素をhtmlに出力する。
 function showHtml(arr) {
+	$("#label").val(arr[0]);
 	htmlElement = "";
 	arr.forEach((el, i) => {
 		htmlElement += `<p>${el}</p>`;

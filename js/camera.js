@@ -48,7 +48,7 @@ window.onload = () => {
 
 			// 演出的な目的で一度映像を止めてSEを再生する
 			video.pause(); // 映像を停止
-			se.play(); // シャッター音
+			// se.play(); // シャッター音
 			setTimeout(() => {
 				video.play(); // 0.5秒後にカメラ再開
 			}, 500);
@@ -57,8 +57,10 @@ window.onload = () => {
 			ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
 			// canvasに表示されているデータを画像に変換
-			var data = canvas.toDataURL("image/jpeg", 0.2); //toDataURL("設定したい拡張子", 画質※画質設定はjpgのときのみ)
+			var data = canvas.toDataURL("image/jpeg", 0.6); //toDataURL("設定したい拡張子", 画質※画質設定はjpgのときのみ)
+			$("#imageData").val(data);
 			console.log(data);
+
 			//
 			//toDataURL("設定したい拡張子", 画質※画質設定はjpgのときのみ)
 			document.getElementById("result").innerHTML = '<img src="' + data + '">';
