@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Document</title>
+		<!-- <link rel="stylesheet" type="text/css" href="./css/style.css" /> -->
+	</head>
+	<body>
+		<img id="img" src="" alt="" />
+
+		<form action="./firebase.html" method="GET">
+			<input type="text" name="sendLabel" id="label" />
+			<input type="submit" value="送信" />
+		</form>
+
+		<div id="output"></div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- テンソルフロウ -->
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"></script>
+		<!-- Load the MobileNet model. -->
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"></script>
+
+		<script src="./../js/tensor.js"></script>
+	</body>
+</html>
