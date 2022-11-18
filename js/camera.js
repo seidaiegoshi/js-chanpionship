@@ -10,28 +10,42 @@
 // 画像を文字列変換したものを格納する変数
 let imageData = "";
 
-window.onload = () => {
-	const video = document.querySelector("#camera");
-	const canvas = document.querySelector("#picture");
-	const se = document.querySelector("#se");
+// window.onload = () => {
+const video = document.querySelector("#camera");
+const canvas = document.querySelector("#picture");
+// const se = document.querySelector("#se");
 
-	/** カメラ設定 */
-	const constraints = {
-		audio: false,
-		video: {
-			width: 300,
-			height: 200,
-			facingMode: "user", // フロントカメラを利用する
-			// facingMode: { exact: "environment" }  // リアカメラを利用する場合
-		},
-	};
+/** カメラ設定 */
+const constraints = {
+	audio: false,
+	video: {
+		width: 300,
+		height: 200,
+		facingMode: "user", // フロントカメラを利用する
+		// facingMode: { exact: "environment" }, // リアカメラを利用する場合
+	},
+};
+let is_front = false;
+let curSTREAM = null;
 
-	/**
-	 * カメラを<video>と同期
-	 */
+/**
+ * カメラを<video>と同期
+ */
+function camera() {
+	is_front = !is_front;
+	constraints.video.facingMode = is_front ? "user" : { exact: "environment" };
+
+	// すでにカメラと接続していたら停止
+	if (curSTREAM !== null) {
+		curSTREAM.getVideoTracks().forEach((camera) => {
+			camera.stop();
+		});
+	}
+
 	navigator.mediaDevices
 		.getUserMedia(constraints)
 		.then((stream) => {
+			curSTREAM = stream;
 			video.srcObject = stream;
 			video.onloadedmetadata = (e) => {
 				video.play();
@@ -40,35 +54,43 @@ window.onload = () => {
 		.catch((err) => {
 			console.log(err.name + ": " + err.message);
 		});
+}
 
-	/**
-	 * シャッターボタン
-	 */
-	document.querySelector("#shutter").addEventListener(
-		"click",
-		() => {
-			const ctx = canvas.getContext("2d"); //2Dグラフィックを描画するためのメソッドやプロパティをもつオブジェクトを返す。
+camera();
 
-			// 演出的な目的で一度映像を止めてSEを再生する
-			video.pause(); // 映像を停止
-			setTimeout(() => {
-				video.play(); // 0.5秒後にカメラ再開
-			}, 500);
+/**
+ * シャッターボタン
+ */
+document.querySelector("#shutter").addEventListener(
+	"click",
+	() => {
+		const ctx = canvas.getContext("2d"); //2Dグラフィックを描画するためのメソッドやプロパティをもつオブジェクトを返す。
 
-			// canvasに画像を貼り付ける
-			ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+		// 演出的な目的で一度映像を止めてSEを再生する
+		video.pause(); // 映像を停止
+		setTimeout(() => {
+			video.play(); // 0.5秒後にカメラ再開
+		}, 500);
 
-			// canvasに表示されているデータを画像に変換
-			imageData = canvas.toDataURL("image/jpeg", 1); //toDataURL("設定したい拡張子", 画質※画質設定はjpgのときのみ)
+		// canvasに画像を貼り付ける
+		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-			//セッションストレージに画像を保存する
-			sessionStorage.img = imageData;
-			console.log(imageData);
+		// canvasに表示されているデータを画像に変換
+		imageData = canvas.toDataURL("image/jpeg", 1); //toDataURL("設定したい拡張子", 画質※画質設定はjpgのときのみ)
 
-			//
-			//toDataURL("設定したい拡張子", 画質※画質設定はjpgのときのみ)
-			document.getElementById("result").innerHTML = '<img src="' + data + '">';
-		},
-		false
-	);
-};
+		//セッションストレージに画像を保存する
+		sessionStorage.img = imageData;
+		console.log(imageData);
+
+		//
+		//toDataURL("設定したい拡張子", 画質※画質設定はjpgのときのみ)
+		document.getElementById("result").innerHTML = '<img src="' + imageData + '">';
+	},
+	false
+);
+
+// 背面カメラとフロントカメラを切り替える
+
+$("#toggleCamera").on("click", () => {
+	camera();
+});
