@@ -25,12 +25,23 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 $("#date_came").on("click", function () {
+	// コメントを登録する
+	const board = [];
+
+	const board_comment = {
+		user_name: "inputからひっぱってくる",
+		text: "inputからひっぱってくる",
+		time: "inputからひっぱってくる",
+	};
+
+	board.push(board_comment);
+	// コメント登録ゾーン終了
+
 	const label_date = $("#label_name").val();
 	console.log(label_date);
+
 	setDoc(doc(db, "label", label_date), {
-		user_name: "SCP-40-JP",
-		text: "ねこです。よろしくおねがいします。",
-		time: "bbbbbb",
+		board,
 	});
 });
 
