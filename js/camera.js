@@ -78,13 +78,54 @@ document.querySelector("#shutter").addEventListener(
 		// canvasに表示されているデータを画像に変換
 		imageData = canvas.toDataURL("image/jpeg", 1); //toDataURL("設定したい拡張子", 画質※画質設定はjpgのときのみ)
 
-		//セッションストレージに画像を保存する
-		sessionStorage.img = imageData;
-		console.log(imageData);
-
 		//
 		//toDataURL("設定したい拡張子", 画質※画質設定はjpgのときのみ)
-		document.getElementById("result").innerHTML = '<img src="' + imageData + '">';
+		document.getElementById("result").innerHTML =
+			'<img src="' + imageData + '">';
+		// --切り抜き機能ためにくぼっちがいじったゾーン--
+
+		// judge_imgはImageとして扱う宣言。
+		const judge_img = new Image();
+		// judge_imgの参照元はimageDataである宣言。
+		judge_img.src = imageData;
+		console.log(judge_img);
+		// テンソルのモデルの読み込み？？？
+		cocoSsd.load().then(async (model) => {
+			// judge_imgをtensorflowのmodelに渡して、結果をtensorflow_judge_dateと変数宣言。
+			const tensorflow_judge_date = await model.detect(judge_img);
+			console.log(tensorflow_judge_date);
+			// 一番、正しい可能性が高いデータ
+			console.log(tensorflow_judge_date[0]);
+			// 写真のどの範囲で判定したかのデータ
+			console.log(tensorflow_judge_date[0].bbox);
+			// htmlのcanvas(clipping)を呼び出し
+			const tensorflow_judge_date_canvas = document.querySelector("#clipping");
+			// tensorflow_judge_date_canvasの縦横を判定の縦横と合わせる。
+			tensorflow_judge_date_canvas.width = tensorflow_judge_date[0].bbox[2];
+			tensorflow_judge_date_canvas.height = tensorflow_judge_date[0].bbox[3];
+			// tensorflow_judge_date_canvasに書く２Dはctx2
+			const ctx2 = tensorflow_judge_date_canvas.getContext("2d");
+			//ctx2にtensorflow_judge_dateの判定範囲従ってjudge_imgを切り取ってcanvas描写。
+			ctx2.drawImage(
+				judge_img,
+				tensorflow_judge_date[0].bbox[0],
+				tensorflow_judge_date[0].bbox[1],
+				tensorflow_judge_date[0].bbox[2],
+				tensorflow_judge_date[0].bbox[3],
+				0,
+				0,
+				tensorflow_judge_date[0].bbox[2],
+				tensorflow_judge_date[0].bbox[3]
+			);
+			const tensorflow_judge_date_img =
+				tensorflow_judge_date_canvas.toDataURL();
+			console.log(tensorflow_judge_date_img);
+
+			//セッションストレージに画像を保存する
+			sessionStorage.img = tensorflow_judge_date_img;
+
+			//--切り抜き機能ためにくぼっちがいじったゾーン終わり--
+		});
 	},
 	false
 );

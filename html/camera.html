@@ -6,6 +6,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Document</title>
 		<!-- <link rel="stylesheet" type="text/css" href="./css/style.css"> -->
+		<!-- tensorflowのライブラリーをインスト-->
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+		<!-- tensorflowのmodelをインスト -->
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
 	</head>
 	<body>
 		担当あっちゃん
@@ -26,6 +30,7 @@
 		</audio> -->
 
 		<div id="result"></div>
+		<canvas id="clipping"></canvas>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="./../js/camera.js"></script>
