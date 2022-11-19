@@ -7,8 +7,47 @@
 		<title>Document</title>
 	</head>
 	<body>
-		<a href="./html/camera.html">カメラ</a>
-		<a href="./html/firebase.html">firebase</a>
-		<a href="./html/tensor.html">tensor</a>
+		<a href="./html/camera.html"><canvas id="particle"></canvas></a>
+
+		<style>
+			* {
+				margin: 0px;
+				padding: 0px;
+			}
+			a {
+				text-decoration: none;
+			}
+			canvas {
+				background: #f5f1e9;
+				width: 100vw;
+				height: 100vh;
+			}
+		</style>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="./js/particleText.js"></script>
+		<script type="text/javascript">
+			$(function () {
+				// デフォルト
+				//$(".particle").particleText("PARTICLE ♡");
+
+				// オプション
+				$("#particle").particleText({
+					// 表示させたいテキスト
+					text: "Airs",
+
+					// パーティクルの色を複数指定可能
+					colors: ["#00bfff"],
+
+					// イージングのスピード。slow, middle, high の3つから選んでください。
+					speed: "slow",
+				});
+
+				// 改行させたい場合
+				// $("#particle").particleText({
+				// 	// <br>の文字列を入れてください、４行くらいはいけるはず...
+				// 	text: "LOVE<br>AND<br>PEACE",
+				// });
+			});
+		</script>
 	</body>
 </html>
