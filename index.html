@@ -18,7 +18,11 @@
 				text-decoration: none;
 			}
 			canvas {
-				background: #f5f1e9;
+				/* background: #f5f1e9; */
+				background-image: url("./assets/img/town.jpg");
+				background-size: cover;
+				background-position: center;
+
 				width: 100vw;
 				height: 100vh;
 			}
@@ -48,6 +52,46 @@
 				// 	text: "LOVE<br>AND<br>PEACE",
 				// });
 			});
+		</script>
+		<script type="text/javascript">
+			imageSet = [
+				{
+					imageUrl: "./assets/img/apple.jpg",
+					moshImageUrl: "./assets/img/apple_mosh.gif",
+				},
+				{
+					imageUrl: "./assets/img/cafe.jpg",
+					moshImageUrl: "./assets/img/cafe_mosh.gif",
+				},
+				{
+					imageUrl: "./assets/img/town.jpg",
+					moshImageUrl: "./assets/img/town_mosh.gif",
+				},
+			];
+
+			function generateRandomNumber(min, max) {
+				const rand = Math.floor(Math.random() * (max - min + 1) + min);
+				return rand;
+			}
+
+			let count = 0;
+			let countReset = false;
+			const displayImage = setInterval(() => {
+				if (count === 0) {
+					if (countReset) {
+						clearInterval(countReset);
+					}
+					countReset = setInterval(() => {
+						count = 0;
+					}, generateRandomNumber(700, 2000));
+				}
+				if (count < 4) {
+					$("canvas").css("background-image", `url(./assets/img/town_mosh.gif)`);
+				} else {
+					$("canvas").css("background-image", `url(./assets/img/town.jpg)`);
+				}
+				count++;
+			}, 50);
 		</script>
 	</body>
 </html>

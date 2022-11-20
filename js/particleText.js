@@ -50,7 +50,7 @@
 				y: ay,
 			};
 			//  粒のサイズ
-			this.r = (canvas.clientWidth / 2) * 0.005;
+			this.r = (canvas.clientWidth / 2) * 0.0055;
 			this.color = colors[Math.floor(Math.random() * colors.length)];
 		}
 
@@ -59,7 +59,8 @@
 			this.y += (this.goal.y - this.y) * easing;
 			ctx.fillStyle = this.color;
 			ctx.beginPath();
-			ctx.arc(this.x, this.y, this.r, Math.PI * 2, false);
+			// ctx.arc(this.x, this.y, this.r, Math.PI * 2, false);
+			ctx.rect(this.x, this.y, this.r * 1.7, this.r * 1.7);
 			ctx.fill();
 		};
 
@@ -67,7 +68,7 @@
 			var ww = (canvas.width = canvas.clientWidth);
 			var wh = (canvas.height = canvas.clientHeight);
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			var fSize = 10;
+			var fSize = 5;
 			ctx.font = "bold " + ww / fSize + "px sans-serif";
 			ctx.textAlign = "center";
 
