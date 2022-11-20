@@ -10,17 +10,39 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 		<script type="module" src="./../js/firebase.js"></script>
-
-		
 	</head>
 	<body>
-		担当くぼっち 1 ファイアベースを用意します
-		・新しいファイアベースのプロジェクト作成＝おk
-		・ファイアベースとウェブアプリの登録＝おk
-		・クラウドファイアストアの作成＝おk ・
 		<div>
 			ラベルネーム : <input type="text" id="label_name" value="ねこです。" />
 		</div>
-		<div>データきた！<button type="button" id="date_came">XXX</button></div>
+		<div>
+			データきた！<button type="button" id="date_came">
+				このラベル名で登録
+			</button>
+		</div>
+
+		<!-- 掲示板投稿フォーム -->
+		<div>
+			<p>name<input type="text" id="user_name" /></p>
+			<p>text<input type="text" id="text" /></p>
+		</div>
+
+		<hr />
+
+		<ul>
+			<li>担当くぼっち 1 ファイアベースを用意します</li>
+			<li>新しいファイアベースのプロジェクト作成＝おk</li>
+			<li>ファイアベースとウェブアプリの登録＝おk</li>
+			<li>クラウドファイアストアの作成＝おk ・</li>
+		</ul>
+
+		<hr />
+
+		<ul>
+			<li>あ</li>
+			<li>
+				label（例:dog）の中に、オブジェクト（name:**,text:**,time:**）が入った配列boardを作る
+			</li>
+		</ul>
 	</body>
 </html>
