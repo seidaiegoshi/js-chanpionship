@@ -7,42 +7,69 @@
 
 // canvas基本 https://qiita.com/kyrieleison/items/a3ebf7c55295c3e7d8f0
 
+// ーーーーーーーーーーーーーーーーーーーーー
+// 宣言
+// ーーーーーーーーーーーーーーーーーーーーー
 // 画像を文字列変換したものを格納する変数
 let imageData = "";
+let media = null;
+let isFront = true;
+let curSTREAM = null;
 
-// window.onload = () => {
-const video = document.querySelector("#camera");
-const canvas = document.querySelector("#picture");
-// const se = document.querySelector("#se");
+// カメラ
+video = document.createElement("video");
+video.setAttribute("autoplay", "");
+video.setAttribute("muted", "");
+video.setAttribute("playsinline", "");
 
-/** カメラ設定 */
 const constraints = {
 	audio: false,
 	video: {
 		width: 300,
 		height: 200,
 		facingMode: "user", // フロントカメラを利用する
-		// facingMode: { exact: "environment" }, // リアカメラを利用する場合
 	},
 };
-let is_front = false;
-let curSTREAM = null;
 
-/**
- * カメラを<video>と同期
- */
-function camera() {
-	is_front = !is_front;
-	constraints.video.facingMode = is_front ? "user" : { exact: "environment" };
+// キャンバス
+const canvas = document.querySelector("#picture");
+const prev = canvas.getContext("2d"); //2Dグラフィックを描画するためのメソッドやプロパティをもつオブジェクトを返す。
 
+// ーーーーーーーーーーーーーーーーーーーーー
+// 関数の定義
+// ーーーーーーーーーーーーーーーーーーーーー
+function isMobile() {
+	// スマホか判定
+	var b = false;
+	var ua = navigator.userAgent;
+	if ((ua.indexOf("iPhone") > 0 || ua.indexOf("Android") > 0) && ua.indexOf("Mobile") > 0) {
+		b = true;
+	}
+	return b;
+}
+
+function canvasUpdate() {
+	//. video to canvas(animation)
+	prev.drawImage(video, 0, 0, canvas.width, canvas.height);
+	requestAnimationFrame(canvasUpdate);
+}
+
+function toggleCamera() {
+	//背面カメラとフロントカメラを切り替える
+	isFront = !isFront;
+	canvas.style.transform = isFront ? "scaleX(-1)" : "scaleX(1)";
+	startVideo();
+}
+
+function startVideo() {
+	constraints.video.facingMode = isFront ? "user" : { exact: "environment" };
 	// すでにカメラと接続していたら停止
 	if (curSTREAM !== null) {
 		curSTREAM.getVideoTracks().forEach((camera) => {
 			camera.stop();
 		});
 	}
-
-	navigator.mediaDevices
+	media = navigator.mediaDevices
 		.getUserMedia(constraints)
 		.then((stream) => {
 			curSTREAM = stream;
@@ -55,8 +82,22 @@ function camera() {
 			console.log(err.name + ": " + err.message);
 		});
 }
+// ーーーーーーーーーーーーーーーーーーーーー
+// 実行
+// ーーーーーーーーーーーーーーーーーーーーー
 
-camera();
+if (isMobile()) {
+	constraints.video.facingMode = "environment";
+	isFront = false;
+} else {
+	canvas.style.transform = "scaleX(-1)";
+	isFront = true;
+	// 背面カメラがない場合は、切り替えボタンを消滅させる。
+	$("#toggleCamera").css("display", "none");
+}
+
+startVideo();
+canvasUpdate();
 
 /**
  * シャッターボタン
@@ -64,8 +105,6 @@ camera();
 document.querySelector("#shutter").addEventListener(
 	"click",
 	() => {
-		const ctx = canvas.getContext("2d"); //2Dグラフィックを描画するためのメソッドやプロパティをもつオブジェクトを返す。
-
 		// 演出的な目的で一度映像を止めてSEを再生する
 		video.pause(); // 映像を停止
 		setTimeout(() => {
@@ -73,15 +112,14 @@ document.querySelector("#shutter").addEventListener(
 		}, 500);
 
 		// canvasに画像を貼り付ける
-		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+		prev.drawImage(video, 0, 0, canvas.width, canvas.height);
 
 		// canvasに表示されているデータを画像に変換
 		imageData = canvas.toDataURL("image/jpeg", 1); //toDataURL("設定したい拡張子", 画質※画質設定はjpgのときのみ)
 
 		//
 		//toDataURL("設定したい拡張子", 画質※画質設定はjpgのときのみ)
-		document.getElementById("result").innerHTML =
-			'<img src="' + imageData + '">';
+		document.getElementById("result").innerHTML = '<img src="' + imageData + '">';
 		// --切り抜き機能ためにくぼっちがいじったゾーン--
 
 		// judge_imgはImageとして扱う宣言。
@@ -117,8 +155,7 @@ document.querySelector("#shutter").addEventListener(
 				tensorflow_judge_date[0].bbox[2],
 				tensorflow_judge_date[0].bbox[3]
 			);
-			const tensorflow_judge_date_img =
-				tensorflow_judge_date_canvas.toDataURL();
+			const tensorflow_judge_date_img = tensorflow_judge_date_canvas.toDataURL();
 			console.log(tensorflow_judge_date_img);
 
 			//セッションストレージに画像を保存する
@@ -133,5 +170,5 @@ document.querySelector("#shutter").addEventListener(
 // 背面カメラとフロントカメラを切り替える
 
 $("#toggleCamera").on("click", () => {
-	camera();
+	toggleCamera();
 });

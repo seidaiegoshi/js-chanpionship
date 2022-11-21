@@ -12,22 +12,23 @@
 		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
 	</head>
 	<body>
-		担当あっちゃん
+		<div>
+			<h1>ATTENTION</h1>
 
-		<h1>HTML5カメラ</h1>
+			<div>
+				<p>canvas</p>
+				<canvas id="picture" width="300" height="200"></canvas>
+			</div>
+			<button id="toggleCamera">切り替えボタン</button>
+			<form>
+				<button type="button" id="shutter">シャッター</button>
+			</form>
 
-		<video id="camera" width="300" height="200"></video>
-		<canvas id="picture" width="300" height="200"></canvas>
-
-		<button id="toggleCamera">切り替えボタン</button>
-		<form>
-			<button type="button" id="shutter">シャッター</button>
-		</form>
-
-		<a href="./tensor.html">シャッターを押したらページ移動</a>
-		<!-- <audio id="se" preload="auto">
+			<a href="./tensor.html">掲示板に行く </a>
+			<!-- <audio id="se" preload="auto">
 			<source src="camera-shutter1.mp3" type="audio/mp3" />
 		</audio> -->
+		</div>
 
 		<div id="result"></div>
 		<canvas id="clipping"></canvas>
