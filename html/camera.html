@@ -10,6 +10,8 @@
 		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 		<!-- tensorflowのmodelをインスト -->
 		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+		<!-- Load the MobileNet model. -->
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"></script>
 	</head>
 	<body>
 		<div>
@@ -19,22 +21,25 @@
 				<canvas id="mainCanvas" width="300" height="200"></canvas>
 			</div>
 			<button id="toggleCamera">切り替えボタン</button>
-			<form>
-				<button type="button" id="shutter">シャッター</button>
-			</form>
+			<button type="button" id="shutter">シャッター</button>
 			<div id="recognitionResults">
 				<ul></ul>
 			</div>
 
-			<a href="./tensor.html" id="goBoard">掲示板に行く </a>
-			<!-- <audio id="se" preload="auto">
-			<source src="camera-shutter1.mp3" type="audio/mp3" />
-		</audio> -->
+			<form action="./firebase.html" method="GET">
+				<!-- ↓ラベル送るよう表示させない -->
+				<input type="text" name="sendLabel" id="label" />
+				<button id="goBoard">掲示板に行く</button>
+			</form>
 		</div>
+
+		<!-- ↓画像認識させるためのcanvas 表示させない -->
+		<canvas id="mobileNetCanvas"></canvas>
 
 		<canvas id="clipping"></canvas>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="./../js/camera.js"></script>
+		<script src="./../js/tensor.js"></script>
 	</body>
 </html>

@@ -16,7 +16,7 @@ let media = null;
 let isFront = true;
 let render = null;
 let cameraIsStop = false;
-let recognitionResultsArray = [];
+let mobileNetImageArray = [];
 
 // カメラ
 video = document.createElement("video");
@@ -90,8 +90,21 @@ function toggleStream() {
 		canvasUpdate();
 	}
 }
-function getRecognitionData(images) {
-	return Array;
+async function getClassifyResult() {
+	//より詳細な認識を試みる
+	mobileNetImageArray.forEach(async (element) => {
+		const img = new Image();
+		img.src = element;
+		await mobilenet.load().then((model) => {
+			// Classify the image.
+			model.classify(img).then((predictions) => {
+				console.log(predictions);
+				// mobileNetResults.push(spaceToHyphen(getFirstLabel(predictions)));
+				return predictions;
+			});
+		});
+	});
+	// return await predictions;
 }
 // ーーーーーーーーーーーーーーーーーーーーー
 // 実行
@@ -127,26 +140,32 @@ document.querySelector("#shutter").addEventListener(
 			imageData = canvas.toDataURL("image/jpeg", 1); //toDataURL("設定したい拡張子", 画質※画質設定はjpgのときのみ)
 			const judge_img = new Image();
 			judge_img.src = imageData;
+			mobileNetImageArray = [];
 
 			cocoSsd.load().then(async (model) => {
 				const tensorflow_judge = await model.detect(canvas);
-				console.log(tensorflow_judge);
-				// 認識結果があったら認識結果と掲示板に行くボタンを表示
-				if (tensorflow_judge.length > 0) {
-					$("#recognitionResults").css("visibility", "visible");
-					$("#goBoard").css("visibility", "visible");
-				}
 
+				// オブジェクト認識で使う
 				let tensorCanvasArray = []; //これにcanvasの情報を入れる
+				// 詳細な画像認識で使う
+				const mobileNetCanvas = document.querySelector("#mobileNetCanvas");
+				const mobCtx = mobileNetCanvas.getContext("2d");
+
 				tensorflow_judge.forEach((el, i) => {
+					console.log(el.class);
 					// hmtl要素を作成
 					$("#recognitionResults ul").append(`
 						<li><canvas id="tensorCanvas${i}"></canvas></li>
 					`);
 					// 横幅とその時の縦の大きさをセット
-					let maxWidth = 50;
+					let maxWidth = 70;
+					let maxheight = 70;
 					let aspectH = (maxWidth * el.bbox[3]) / el.bbox[2];
-					//canvasを準備して
+					if (aspectH > maxheight) {
+						aspectH = maxheight;
+						maxWidth = (maxheight * el.bbox[2]) / el.bbox[3];
+					}
+					//canvasを準備
 					tensorCanvasArray.push(document.querySelector(`#tensorCanvas${i}`));
 					tensorCanvasArray[i].width = maxWidth;
 					tensorCanvasArray[i].height = aspectH;
@@ -164,19 +183,51 @@ document.querySelector("#shutter").addEventListener(
 						maxWidth, //描画後の幅(アスペクト)
 						aspectH //描画後の高さ(アスペクト)
 					);
+
+					// 取得した各要素を識別してラベルを作成する
+					//canvasを準備
+
+					mobileNetCanvas.width = el.bbox[2];
+					mobileNetCanvas.height = el.bbox[3];
+					mobCtx.clearRect(0, 0, mobileNetCanvas.width, mobileNetCanvas.height);
+					mobCtx.drawImage(
+						canvas, //もとの図形
+						el.bbox[0], //開始点x
+						el.bbox[1], //開始点y
+						el.bbox[2], //開始点からの幅
+						el.bbox[3], //開始点からの高さ
+						0, //どこに描くかx
+						0, //どこに描くかy
+						el.bbox[2], //描画後の幅(アスペクト)
+						el.bbox[3] //描画後の高さ(アスペクト)
+					);
+
+					// より詳細な認識のために、画像データは一旦配列に入れる。
+					mobileNetImageArray.push(mobileNetCanvas.toDataURL("image/jpeg", 1));
+				});
+
+				//より詳細な認識を行って、labelに表示する。
+				const mobileNetResults = [];
+				mobileNetImageArray.forEach(async (element) => {
+					const img = new Image();
+					img.src = element;
+					mobilenet.load().then((model) => {
+						// Classify the image.
+						model.classify(img).then((predictions) => {
+							//認識後の処理はここに書かないと、うまく表示できない！
+							mobileNetResults.push(spaceToHyphen(getFirstLabel(predictions)));
+							$("#label").val(mobileNetResults.join("-"));
+							$("#recognitionResults").css("visibility", "visible");
+							$("#goBoard").css("visibility", "visible");
+						});
+					});
 				});
 			});
-
-			//セッションストレージに画像を保存する
-			// sessionStorage.img = tensorflow_judge_img;
-
-			// 認識結果があったら、掲示板へ移動するボタンを表示
 		} else {
 			// カメラが動いているとき、
 
 			// 認識結果をリセット
 			$("#recognitionResults").css("visibility", "hidden");
-			recognitionResultsArray = [];
 			$("#recognitionResults ul").html("");
 
 			// 掲示板へ移動のボタンを非表示
