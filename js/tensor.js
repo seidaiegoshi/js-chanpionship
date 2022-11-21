@@ -1,22 +1,12 @@
 let img = new Image();
 
-// 受信処理
+// 画像取得処理
 window.onload = function () {
 	// URLを取得
-	const url = new URL(window.location.href);
-
-	// URLSearchParamsオブジェクトを取得
-	const params = url.searchParams;
-
-	// consoleに受け取ったパラメータを出力
-	console.log(params);
-
-	// パラメータから「cameraData」を取得
-	const image = params.get("cameraData");
-	console.log(image);
-	$("#img").attr("src", image);
-
-	img.src = image;
+	img = new Image();
+	img.src = sessionStorage.img;
+	console.log(sessionStorage.img);
+	$("#img").attr("src", img.src);
 };
 
 // const img = document.getElementById("img");

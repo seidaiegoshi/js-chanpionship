@@ -10,17 +10,23 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 		<script type="module" src="./../js/firebase.js"></script>
-
-		
 	</head>
 	<body>
-		担当くぼっち 1 ファイアベースを用意します
-		・新しいファイアベースのプロジェクト作成＝おk
-		・ファイアベースとウェブアプリの登録＝おk
-		・クラウドファイアストアの作成＝おk ・
+		<!-- タイトル -->
 		<div>
-			ラベルネーム : <input type="text" id="label_name" value="ねこです。" />
+			<p><span id="board_name"></span>の掲示板</p>
 		</div>
-		<div>データきた！<button type="button" id="date_came">XXX</button></div>
+		<!-- 掲示板の内容 -->
+
+		<div>
+			<ul id="post_contents"></ul>
+		</div>
+
+		<!-- 掲示板投稿フォーム -->
+		<div>
+			<div><span>name</span><input type="text" id="user_name" /></div>
+			<div><span>text</span><input type="text" id="text" /></div>
+			<button type="button" id="send_message">投稿</button>
+		</div>
 	</body>
 </html>

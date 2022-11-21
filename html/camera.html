@@ -6,6 +6,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Document</title>
 		<!-- <link rel="stylesheet" type="text/css" href="./css/style.css"> -->
+		<!-- tensorflowのライブラリーをインスト-->
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+		<!-- tensorflowのmodelをインスト -->
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
 	</head>
 	<body>
 		担当あっちゃん
@@ -14,20 +18,19 @@
 
 		<video id="camera" width="300" height="200"></video>
 		<canvas id="picture" width="300" height="200"></canvas>
+
+		<button id="toggleCamera">切り替えボタン</button>
 		<form>
 			<button type="button" id="shutter">シャッター</button>
 		</form>
 
+		<a href="./tensor.html">シャッターを押したらページ移動</a>
 		<!-- <audio id="se" preload="auto">
 			<source src="camera-shutter1.mp3" type="audio/mp3" />
 		</audio> -->
 
 		<div id="result"></div>
-
-		<form action="./tensor.html" method="GET">
-			<input type="text" name="cameraData" id="imageData" />
-			<input type="submit" value="送信" />
-		</form>
+		<canvas id="clipping"></canvas>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="./../js/camera.js"></script>
