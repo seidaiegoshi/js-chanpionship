@@ -1,31 +1,12 @@
-let img = new Image();
-
-// 画像取得処理
-window.onload = function () {
-	// URLを取得
-	img = new Image();
-	img.src = sessionStorage.img;
-	console.log(sessionStorage.img);
-	$("#img").attr("src", img.src);
-};
-
-// const img = document.getElementById("img");
-console.log(img);
-
 // Load the model.
 // 機械学習モデルのロードが完了したら、
-mobilenet.load().then((model) => {
-	// Classify the image.
-	model.classify(img).then((predictions) => {
-		console.log("Predictions: ");
-		console.log(predictions);
-		showHtml(splitClassNamesToArray(predictions));
-	});
-});
 
 // スペース区切りをハイフン区切りにする。
 function spaceToHyphen(str) {
 	return str.replace(/ /g, "-");
+}
+function getFirstLabel(arr) {
+	return arr[0].className.split(", ")[0];
 }
 
 // ClassNameを全部バラして認識結果で出てきた単語を全部配列に入れる。
