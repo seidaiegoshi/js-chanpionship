@@ -3,7 +3,6 @@
 * {
 	margin: 0;
 	padding: 0;
-	
 }
 
 html {
@@ -29,7 +28,7 @@ div[name="whole"] {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	justify-content:space-between;
+	justify-content: space-evenly;
 	box-sizing: border-box;
 	background: rgba(0, 0, 0, 0.7);
 	/* wrapper_水色枠線 */
@@ -43,6 +42,10 @@ div[name="whole"] {
 
 div[name="title"] {
 	height: 10%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
 }
 
 div[name="camera"] {
@@ -54,21 +57,39 @@ div[name="camera"] {
 }
 #mainCanvas {
 	height: 100%;
-	width: 90%;
+	width: 100%;
+}
+
+div[name="result"] {
+	height: 70px;
+	width: 60%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+div[name="result"] ul {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	list-style: none;
 }
 
 div[name="button"] {
 	height: 10%;
-}
-
-div[name="result"] {
-	height: 10%;
+	width: 30%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
 }
 
 div[name="gopage"] {
 	height: 10%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
 }
-
 
 
 #mobileNetCanvas,
