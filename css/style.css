@@ -143,6 +143,7 @@ div[name="gopage"] {
 	font-size: 1.5rem;
 	filter: drop-shadow(2px 2px 0px #ff53df);
 	flex-direction: column;
+	visibility: hidden;
 }
 
 #mobileNetCanvas,
