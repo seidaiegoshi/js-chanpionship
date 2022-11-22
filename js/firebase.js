@@ -27,20 +27,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// ランダムな背景画像を設定する
+setBackGroundImage("./..");
+
 // ラベル名受信処理
 // ーーーーーーーーーーーーーーーーーーーーーー
 // URLを取得
-const url = new URL(window.location.href);
+// const url = new URL(window.location.href);
 
 // URLSearchParamsオブジェクトを取得
-const params = url.searchParams;
+// const params = url.searchParams;
 
 // consoleに受け取ったパラメータを出力
 // console.log(params);
 
 // パラメータからラベル名を取得
-const label_name = params.get("sendLabel");
+// const label_name = params.get("sendLabel");
+const label_name = sessionStorage.label;
 // console.log(label_name);
+// $("#board_name").text(label_name);
 $("#board_name").text(label_name);
 
 // firebase読み取り処理

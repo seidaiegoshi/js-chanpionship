@@ -17,6 +17,7 @@ let isFront = true;
 let render = null;
 let cameraIsStop = false;
 let mobileNetImageArray = [];
+let streamObj = null;
 
 // カメラ
 video = document.createElement("video");
@@ -66,9 +67,16 @@ function toggleCamera() {
 function startVideo() {
 	constraints.video.facingMode = isFront ? "user" : { exact: "environment" };
 	// すでにカメラと接続していたら停止
+	if (streamObj !== null) {
+		// すでにカメラと接続していたら停止
+		streamObj.getVideoTracks().forEach((camera) => {
+			camera.stop();
+		});
+	}
 	media = navigator.mediaDevices
 		.getUserMedia(constraints)
 		.then((stream) => {
+			streamObj = stream;
 			video.srcObject = stream;
 			video.onloadedmetadata = (e) => {
 				video.play();
@@ -109,6 +117,9 @@ async function getClassifyResult() {
 // ーーーーーーーーーーーーーーーーーーーーー
 // 実行
 // ーーーーーーーーーーーーーーーーーーーーー
+
+// ランダムな背景画像を設定する
+setBackGroundImage("./..");
 
 if (isMobile()) {
 	constraints.video.facingMode = "environment";
@@ -216,7 +227,10 @@ document.querySelector("#shutter").addEventListener(
 						model.classify(img).then((predictions) => {
 							//認識後の処理はここに書かないと、うまく表示できない！
 							mobileNetResults.push(spaceToHyphen(getFirstLabel(predictions)));
-							$("#label").val(mobileNetResults.join("-"));
+							const label = mobileNetResults.join("-");
+							console.log(label);
+							sessionStorage.label = label;
+							$("#label").val(label);
 							$("#recognitionResults").css("visibility", "visible");
 							$("#goBoard").css("visibility", "visible");
 						});

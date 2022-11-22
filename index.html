@@ -53,6 +53,7 @@
 		</style>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="./js/particleText.js"></script>
+		<script src="./js/randomBackgroundImage.js"></script>
 		<script type="text/javascript">
 			$(function () {
 				// $(window).load(function () {
@@ -83,33 +84,13 @@
 				});
 			}
 
-			imageSet = [
-				{
-					imageUrl: "./assets/img/apple.jpg",
-					moshImageUrl: "./assets/img/apple_mosh.gif",
-				},
-				{
-					imageUrl: "./assets/img/cafe.jpg",
-					moshImageUrl: "./assets/img/cafe_mosh.gif",
-				},
-				{
-					imageUrl: "./assets/img/town.jpg",
-					moshImageUrl: "./assets/img/town_mosh.gif",
-				},
-			];
-
-			function generateRandomNumber(min, max) {
-				const rand = Math.floor(Math.random() * (max - min + 1) + min);
-				return rand;
-			}
-
 			let count = 0;
 			let countReset = false;
 			const imgBack = $("#imgBack");
 			const imgMoshBack = $("#imgMoshBack");
 			pick = generateRandomNumber(0, imageSet.length - 1);
-			const imgUrl = imageSet[pick].imageUrl;
-			const img_moshUrl = imageSet[pick].moshImageUrl;
+			const imgUrl = "." + imageSet[pick].imageUrl;
+			const img_moshUrl = "." + imageSet[pick].moshImageUrl;
 
 			let isFirstLoadComplete = false;
 			imgBack.on("load", function () {
