@@ -5,8 +5,45 @@
 	padding: 0;
 }
 
+html {
+	/* display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center; */
+	height:100% ;
+	width:100% ;
+}
+body {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	height:100% ;
+	width:100% ;
+}
+
 /* camera
 ---------------------- */
+div[name="wrapper"] {
+	box-sizing: border-box;
+
+	background: rgba(0, 0, 0, 0.7);
+	/* wrapper_水色枠線 */
+	border: 1px solid #53d6ff;
+	/* アイコン_ピンクシャドウ */
+	box-shadow: 2px 2px 0px #ff53df;
+	border-radius: 12px;
+	height: 90%;
+	width: 90%;
+
+	/* width: 334px;
+	height: 705px; */
+}
+
+#mobileNetCanvas,
+#clipping {
+	display: none;
+}
 
 /* firebase
 ---------------------- */
