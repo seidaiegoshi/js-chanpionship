@@ -34,7 +34,10 @@ body::before {
 	background-color: rgba(0, 0, 0, 0.6);
 	z-index: -1;
 }
-
+a {
+	text-decoration: none;
+	color: inherit;
+}
 ul {
 	list-style: none;
 }
@@ -47,8 +50,6 @@ button {
 .material-symbols-outlined.md-60 {
 	filter: drop-shadow(2px 2px 0px #ff53df);
 	font-size: 60px;
-}
-.material-symbols-outlined.md-60 {
 }
 
 .material-symbols-outlined.md-60:hover {
@@ -73,6 +74,15 @@ div[name="whole"] {
 	height: 90%;
 	width: 90%;
 	position: relative;
+}
+.backToCameraPage {
+	position: absolute;
+	left: 5px;
+	top: 5px;
+}
+
+.material-symbols-outlined.md-40 {
+	font-size: 40px;
 }
 
 div[name="title"] {
@@ -258,7 +268,7 @@ p[name="board_name"] {
 	font-size: 1.3rem;
 	/* filter: drop-shadow(2px 2px 0px #ff53df); */
 	flex-direction: column;
-	/* margin-bottom: 16px; */
+	margin-bottom: 8px;
 	/* margin-top: 10px; */
 }
 #send_message:hover {
