@@ -1,8 +1,8 @@
 imageSet = [
-	{
-		imageUrl: "/assets/img/apple.jpg",
-		moshImageUrl: "/assets/img/apple_mosh.gif",
-	},
+	// {
+	// 	imageUrl: "/assets/img/apple.jpg",
+	// 	moshImageUrl: "/assets/img/apple_mosh.gif",
+	// },
 	{
 		imageUrl: "/assets/img/cafe.jpg",
 		moshImageUrl: "/assets/img/cafe_mosh.gif",

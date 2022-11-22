@@ -4,7 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>ファイアベース</title>
+		<title>Airs</title>
+		<link rel="icon" href="./../assets/img/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="./../css/style.css" />
 
 		<link
@@ -14,8 +15,8 @@
 	<body>
 		<div name="whole">
 			<!-- タイトル -->
-			<div>
-				<p><span id="board_name"></span>の掲示板</p>
+			<div class="bulletin_board_name">
+				<p id="board_label"><span id="board_name"></span>の掲示板</p>
 			</div>
 			<!-- 掲示板の内容 -->
 
@@ -24,12 +25,19 @@
 			</div>
 
 			<!-- 掲示板投稿フォーム -->
-			<div name="submission">
-				<button type="button" id="send_message">投稿</button>
+
+			<div class="submission">
+				<div class="postcolumn">
+					<div><span class="inputLabel">name</span><input type="text" id="user_name" /></div>
+					<div>
+						<span class="inputLabel">text</span><textarea type="text" id="text"></textarea>
+						<button id="sendButton"></button>
+					</div>
 				</div>
-				<div name="Post_column">
-				<div><span>name</span><input type="text" id="user_name" /></div>
-				<div><span>text</span><input type="text" id="text" /></div>
+				<div class="sendButtonArea">
+					<button type="button" id="send_message">
+						意味を与える<span class="material-symbols-outlined"> send </span>
+					</button>
 				</div>
 			</div>
 		</div>
