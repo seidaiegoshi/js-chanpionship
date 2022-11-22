@@ -73,7 +73,7 @@ function toggleCamera() {
 }
 
 function startVideo() {
-	constraints.video.facingMode = isFront ? "user" : { exact: "environment" };
+	constraints.video.facingMode = isFront ? "user" : "environment";
 	// すでにカメラと接続していたら停止
 	if (streamObj !== null) {
 		// すでにカメラと接続していたら停止
@@ -92,6 +92,9 @@ function startVideo() {
 		})
 		.catch((err) => {
 			console.log(err.name + ": " + err.message);
+
+			setCameraEnv(!isFront, true);
+			startVideo();
 		});
 }
 
@@ -122,6 +125,27 @@ async function getClassifyResult() {
 	});
 	// return await predictions;
 }
+// スマホかPCかの設定を行う
+function setCameraEnv(isPC, pcButMobileEnv) {
+	if (isPC) {
+		constraints.video.facingMode = "user";
+		canvas.style.transform = "scaleX(-1)";
+		isFront = true;
+		// 背面カメラがない場合は、切り替えボタンを消滅させる。
+		$("#toggleCamera").css("display", "none");
+		if (pcButMobileEnv) {
+			constraints.video.facingMode = "environment";
+		}
+	} else {
+		constraints.video.facingMode = "environment";
+		isFront = false;
+		if (pcButMobileEnv) {
+			constraints.video.facingMode = "user";
+			canvas.style.transform = "scaleX(-1)";
+			$("#toggleCamera").css("display", "none");
+		}
+	}
+}
 // ーーーーーーーーーーーーーーーーーーーーー
 // 実行
 // ーーーーーーーーーーーーーーーーーーーーー
@@ -130,13 +154,9 @@ async function getClassifyResult() {
 setBackGroundImage("./..");
 
 if (isMobile()) {
-	constraints.video.facingMode = "environment";
-	isFront = false;
+	setCameraEnv(false, false);
 } else {
-	canvas.style.transform = "scaleX(-1)";
-	isFront = true;
-	// 背面カメラがない場合は、切り替えボタンを消滅させる。
-	$("#toggleCamera").css("display", "none");
+	setCameraEnv(true, false);
 }
 
 startVideo();
@@ -163,6 +183,9 @@ document.querySelector("#shutter").addEventListener(
 
 			cocoSsd.load().then(async (model) => {
 				const tensorflow_judge = await model.detect(canvas);
+				if (tensorflow_judge.length == 0) {
+					console.log("test");
+				}
 
 				// オブジェクト認識で使う
 				let tensorCanvasArray = []; //これにcanvasの情報を入れる
