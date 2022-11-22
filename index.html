@@ -8,6 +8,7 @@
 	</head>
 	<body>
 		<a href="./html/camera.html"><canvas id="particle"></canvas></a>
+		<img src="" alt="" id="imgBack" />
 
 		<style>
 			* {
@@ -19,22 +20,46 @@
 			}
 			canvas {
 				/* background: #f5f1e9; */
-				background-image: url("./assets/img/town.jpg");
-				background-size: cover;
-				background-position: center;
+				/* background-image: url("./assets/img/town.jpg"); */
+				/* background-size: cover; */
+				/* background-position: center; */
+				background-color: transparent;
 
 				width: 100vw;
 				height: 100vh;
+			}
+			#imgBack {
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+
+				/* min-height: 100vh; */
+				z-index: -10;
 			}
 		</style>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="./js/particleText.js"></script>
 		<script type="text/javascript">
 			$(function () {
+				// $(window).load(function () {
 				// デフォルト
 				//$(".particle").particleText("PARTICLE ♡");
-
 				// オプション
+				// 改行させたい場合
+				// $("#particle").particleText({
+				// 	// <br>の文字列を入れてください、４行くらいはいけるはず...
+				// 	text: "LOVE<br>AND<br>PEACE",
+				// });
+				// });
+			});
+		</script>
+		<script type="text/javascript">
+			function drawTitle() {
+				isFirstLoadComplete = true;
+
 				$("#particle").particleText({
 					// 表示させたいテキスト
 					text: "Airs",
@@ -45,15 +70,8 @@
 					// イージングのスピード。slow, middle, high の3つから選んでください。
 					speed: "slow",
 				});
+			}
 
-				// 改行させたい場合
-				// $("#particle").particleText({
-				// 	// <br>の文字列を入れてください、４行くらいはいけるはず...
-				// 	text: "LOVE<br>AND<br>PEACE",
-				// });
-			});
-		</script>
-		<script type="text/javascript">
 			imageSet = [
 				{
 					imageUrl: "./assets/img/apple.jpg",
@@ -76,6 +94,20 @@
 
 			let count = 0;
 			let countReset = false;
+			const imgBack = $("#imgBack");
+			pick = generateRandomNumber(0, imageSet.length - 1);
+			const imgUrl = imageSet[pick].imageUrl;
+			const img_moshUrl = imageSet[pick].moshImageUrl;
+
+			let isFirstLoadComplete = false;
+			imgBack.on("load", function () {
+				if (!isFirstLoadComplete) {
+					drawTitle();
+				}
+			});
+			imgBack.attr("src", imgUrl);
+
+			// 画像を切り替える処理
 			const displayImage = setInterval(() => {
 				if (count === 0) {
 					if (countReset) {
@@ -83,12 +115,14 @@
 					}
 					countReset = setInterval(() => {
 						count = 0;
-					}, generateRandomNumber(700, 2000));
+					}, generateRandomNumber(1000, 3000));
 				}
 				if (count < 4) {
-					$("canvas").css("background-image", `url(./assets/img/town_mosh.gif)`);
+					imgBack.attr("src", img_moshUrl);
+					// $("canvas").css("background-image", `url(${img_mosh.src})`);
 				} else {
-					$("canvas").css("background-image", `url(./assets/img/town.jpg)`);
+					imgBack.attr("src", imgUrl);
+					// $("canvas").css("background-image", `url(${img.src})`);
 				}
 				count++;
 			}, 50);

@@ -1,0 +1,72 @@
+/* All
+---------------------- */
+* {
+	margin: 0;
+	padding: 0;
+	
+}
+
+html {
+	/* display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center; */
+	height: 100%;
+	width: 100%;
+}
+body {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+}
+
+/* camera
+---------------------- */
+div[name="wrapper"] {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	/* justify-content: center; */
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.7);
+	/* wrapper_水色枠線 */
+	border: 1px solid #53d6ff;
+	/* アイコン_ピンクシャドウ */
+	box-shadow: 2px 2px 0px #ff53df;
+	border-radius: 12px;
+	height: 90%;
+	width: 90%;
+}
+div[name="wrapper"] h1 {
+	height: 10%;
+	color: blue;
+}
+div[name="camera"] {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	height: 50%;
+}
+#mainCanvas {
+	height: 100%;
+	width: 90%;
+}
+
+
+#mobileNetCanvas,
+#clipping {
+	display: none;
+}
+/* firebase
+---------------------- */
+#boardHistory {
+	width: 300px;
+	height: 100px;
+	overflow: auto;
+}
+
+/* テスト */

@@ -82,6 +82,8 @@ onSnapshot(docRef, (docSnap) => {
 			</li>
 		`);
 	}
+	// 一番下までスクロール
+	$("#boardHistory")[0].scrollTop = $("#boardHistory")[0].scrollHeight;
 });
 
 $("#send_message").on("click", async function () {
