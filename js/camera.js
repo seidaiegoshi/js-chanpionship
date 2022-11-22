@@ -110,6 +110,9 @@ async function getClassifyResult() {
 // 実行
 // ーーーーーーーーーーーーーーーーーーーーー
 
+// ランダムな背景画像を設定する
+setBackGroundImage("./..");
+
 if (isMobile()) {
 	constraints.video.facingMode = "environment";
 	isFront = false;
