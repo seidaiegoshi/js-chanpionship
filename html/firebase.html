@@ -10,23 +10,31 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 		<script type="module" src="./../js/firebase.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	</head>
 	<body>
-		<!-- タイトル -->
-		<div>
-			<p><span id="board_name"></span>の掲示板</p>
-		</div>
-		<!-- 掲示板の内容 -->
+		<div name="whole">
+			<!-- タイトル -->
+			<div>
+				<p><span id="board_name"></span>の掲示板</p>
+			</div>
+			<!-- 掲示板の内容 -->
 
-		<div id="boardHistory">
-			<ul id="post_contents"></ul>
-		</div>
+			<div id="boardHistory">
+				<ul id="post_contents"></ul>
+			</div>
 
-		<!-- 掲示板投稿フォーム -->
-		<div>
-			<div><span>name</span><input type="text" id="user_name" /></div>
-			<div><span>text</span><input type="text" id="text" /></div>
-			<button type="button" id="send_message">投稿</button>
+			<!-- 掲示板投稿フォーム -->
+			<div name="submission">
+				<button type="button" id="send_message">投稿</button>
+				</div>
+				<div name="Post_column">
+				<div><span>name</span><input type="text" id="user_name" /></div>
+				<div><span>text</span><input type="text" id="text" /></div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
