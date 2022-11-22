@@ -117,17 +117,27 @@ div[name="button"] {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
+	margin-bottom: 20px;
 }
 #shutter {
 	width: 100px;
 }
 
 div[name="gopage"] {
-	height: 10%;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
+	margin-bottom: 20px;
+}
+#goBoard {
+	color: white;
+	height: 43px;
+	background-color: #53d6ff;
+	padding: 0px 50px;
+	font-family: "DotGothic16";
+	font-size: 1.5rem;
+	filter: drop-shadow(2px 2px 0px #ff53df);
 }
 
 #mobileNetCanvas,
