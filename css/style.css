@@ -102,6 +102,9 @@ div[name="camera"] {
 	width: 100%;
 	height: auto;
 }
+#Analyzing {
+	color: white;
+}
 
 div[name="result"] {
 	height: 70px;
