@@ -12,26 +12,30 @@
 		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
 		<!-- Load the MobileNet model. -->
 		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"></script>
-		<link rel="stylesheet" href="./../css/style.css">
+		<link rel="stylesheet" href="./../css/style.css" />
 	</head>
 	<body>
 		<div name="wrapper">
-			<h1>ATTENTION</h1>
-
-			<div>
-				<canvas id="mainCanvas" width="300" height="200"></canvas>
+			<div name="title">
+				<h1>ATTENTION</h1>
 			</div>
-			<button id="toggleCamera">切り替えボタン</button>
-			<button type="button" id="shutter">シャッター</button>
-			<div id="recognitionResults">
+			<div name="camera">
+				<canvas id="mainCanvas"></canvas>
+			</div>
+			<div id="recognitionResults" name="result">
 				<ul></ul>
 			</div>
-
-			<form action="./firebase.html" method="GET">
-				<!-- ↓ラベル送るよう表示させない -->
-				<input type="text" name="sendLabel" id="label" />
-				<button id="goBoard">掲示板に行く</button>
-			</form>
+			<div name="button">
+				<button type="button" id="shutter">シャッター</button>
+				<button id="toggleCamera">切り替えボタン</button>
+			</div>
+			<div name="gopage">
+				<form action="./firebase.html" method="GET">
+					<!-- ↓ラベル送るよう表示させない -->
+					<input type="text" name="sendLabel" id="label" />
+					<button id="goBoard">掲示板に行く</button>
+				</form>
+			</div>
 		</div>
 
 		<!-- ↓画像認識させるためのcanvas 表示させない -->
