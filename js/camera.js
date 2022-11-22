@@ -216,7 +216,10 @@ document.querySelector("#shutter").addEventListener(
 						model.classify(img).then((predictions) => {
 							//認識後の処理はここに書かないと、うまく表示できない！
 							mobileNetResults.push(spaceToHyphen(getFirstLabel(predictions)));
-							$("#label").val(mobileNetResults.join("-"));
+							const label = mobileNetResults.join("-");
+							console.log(label);
+							sessionStorage.label = label;
+							$("#label").val(label);
 							$("#recognitionResults").css("visibility", "visible");
 							$("#goBoard").css("visibility", "visible");
 						});

@@ -39,8 +39,10 @@ const params = url.searchParams;
 // console.log(params);
 
 // パラメータからラベル名を取得
-const label_name = params.get("sendLabel");
+// const label_name = params.get("sendLabel");
+const label_name = sessionStorage.label;
 // console.log(label_name);
+// $("#board_name").text(label_name);
 $("#board_name").text(label_name);
 
 // firebase読み取り処理
