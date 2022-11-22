@@ -184,7 +184,9 @@ document.querySelector("#shutter").addEventListener(
 			cocoSsd.load().then(async (model) => {
 				const tensorflow_judge = await model.detect(canvas);
 				if (tensorflow_judge.length == 0) {
-					$("#isNothing").text("そこには何も無いようだ。いや、「無」はあるのかもしれない。");
+					$("#Analyzing").text("そこには何も無いようだ。いや、「無」はあるのかもしれない。");
+				} else {
+					$("#Analyzing").text("探索中・・・");
 				}
 
 				// オブジェクト認識で使う
@@ -274,7 +276,7 @@ document.querySelector("#shutter").addEventListener(
 			// 認識結果をリセット
 			$("#recognitionResults").css("visibility", "hidden");
 			$("#recognitionResults ul").html("");
-			$("#isNothing").text("");
+			$("#Analyzing").text("");
 
 			// 掲示板へ移動のボタンを非表示
 			$("#goBoard").css("visibility", "hidden");
