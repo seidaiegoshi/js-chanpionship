@@ -17,6 +17,7 @@ let isFront = true;
 let render = null;
 let cameraIsStop = false;
 let mobileNetImageArray = [];
+let streamObj = null;
 
 // カメラ
 video = document.createElement("video");
@@ -66,9 +67,16 @@ function toggleCamera() {
 function startVideo() {
 	constraints.video.facingMode = isFront ? "user" : { exact: "environment" };
 	// すでにカメラと接続していたら停止
+	if (streamObj !== null) {
+		// すでにカメラと接続していたら停止
+		streamObj.getVideoTracks().forEach((camera) => {
+			camera.stop();
+		});
+	}
 	media = navigator.mediaDevices
 		.getUserMedia(constraints)
 		.then((stream) => {
+			streamObj = stream;
 			video.srcObject = stream;
 			video.onloadedmetadata = (e) => {
 				video.play();
