@@ -68,8 +68,10 @@
 			var ww = (canvas.width = canvas.clientWidth);
 			var wh = (canvas.height = canvas.clientHeight);
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			var fSize = 5;
-			ctx.font = "bold " + ww / fSize + "px sans-serif";
+			var fASize = 5;
+			const fontSize = ww / fASize;
+			ctx.font = "bold " + fontSize + "px sans-serif";
+
 			ctx.textAlign = "center";
 
 			if (!flg) {
@@ -83,7 +85,8 @@
 				if (canvas.height <= 300 && canvas.width > 768) {
 					hp = 1.5;
 				}
-				ctx.fillText(text, ww / 2, wh / hp, ww);
+				ctx.fillText(text, ww / 2, (wh + fontSize) / 2, ww);
+				// console.log(wh / hp);
 			}
 
 			function drawManyLineText() {
