@@ -28,8 +28,16 @@ video.setAttribute("playsinline", "");
 const constraints = {
 	audio: false,
 	video: {
-		// width: 300,
-		// height: 200,
+		width: {
+			min: 1280,
+			ideal: 1920,
+			max: 2560,
+		},
+		height: {
+			min: 720,
+			ideal: 1080,
+			max: 1440,
+		},
 		facingMode: "user", // フロントカメラを利用する
 	},
 };

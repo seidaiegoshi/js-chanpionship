@@ -131,7 +131,7 @@ $("#send_message").on("click", async function () {
 
 		board.push(board_comment);
 
-		$("#user_name").val("");
+		// $("#user_name").val("");
 		$("#text").val("");
 		// コメント登録ゾーン終了
 
