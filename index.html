@@ -95,8 +95,9 @@
 			let count = 0;
 			let countReset = false;
 			const imgBack = $("#imgBack");
-			const imgUrl = "./assets/img/town.jpg";
-			const img_moshUrl = "./assets/img/town_mosh.gif";
+			pick = generateRandomNumber(0, imageSet.length - 1);
+			const imgUrl = imageSet[pick].imageUrl;
+			const img_moshUrl = imageSet[pick].moshImageUrl;
 
 			let isFirstLoadComplete = false;
 			imgBack.on("load", function () {
