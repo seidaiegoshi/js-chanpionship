@@ -95,10 +95,11 @@ div[name="camera"] {
 	flex-direction: column;
 	justify-content: center;
 	height: 50%;
+	width: 80%;
 }
 #mainCanvas {
 	width: 100%;
-	height: 100%;
+	height: auto;
 }
 
 div[name="result"] {
