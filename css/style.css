@@ -1,0 +1,17 @@
+/* All
+---------------------- */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* camera
+---------------------- */
+
+/* firebase
+---------------------- */
+#boardHistory {
+	width: 300px;
+	height: 100px;
+	overflow: auto;
+}
