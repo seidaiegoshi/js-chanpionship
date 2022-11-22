@@ -25,11 +25,11 @@ body {
 
 /* camera
 ---------------------- */
-div[name="wrapper"] {
+div[name="whole"] {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	/* justify-content: center; */
+	justify-content:space-between;
 	box-sizing: border-box;
 	background: rgba(0, 0, 0, 0.7);
 	/* wrapper_水色枠線 */
@@ -40,10 +40,11 @@ div[name="wrapper"] {
 	height: 90%;
 	width: 90%;
 }
-div[name="wrapper"] h1 {
+
+div[name="title"] {
 	height: 10%;
-	color: blue;
 }
+
 div[name="camera"] {
 	display: flex;
 	align-items: center;
@@ -55,6 +56,19 @@ div[name="camera"] {
 	height: 100%;
 	width: 90%;
 }
+
+div[name="button"] {
+	height: 10%;
+}
+
+div[name="result"] {
+	height: 10%;
+}
+
+div[name="gopage"] {
+	height: 10%;
+}
+
 
 
 #mobileNetCanvas,
