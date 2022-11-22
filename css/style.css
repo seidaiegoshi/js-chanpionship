@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
 /* All
 ---------------------- */
 * {
@@ -23,7 +24,21 @@ body {
 }
 
 ul {
-  list-style: none;
+	list-style: none;
+}
+button {
+	background-color: transparent;
+	color: #53d6ff;
+	border: none;
+	cursor: pointer;
+}
+.material-symbols-outlined {
+	font-size: 60px !important;
+	filter: drop-shadow(2px 2px 0px #ff53df);
+}
+.material-symbols-outlined:hover {
+	color: #ff53df;
+	filter: drop-shadow(2px 2px 0px #53d6ff);
 }
 /* camera
 ---------------------- */
@@ -49,6 +64,12 @@ div[name="title"] {
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
+}
+div[name="title"] h1 {
+	color: #53d6ff;
+	font-family: "DotGothic16";
+	font-style: normal;
+	font-weight: 400;
 }
 
 div[name="camera"] {
@@ -85,6 +106,9 @@ div[name="button"] {
 	align-items: center;
 	justify-content: space-evenly;
 }
+#shutter {
+	width: 100px;
+}
 
 div[name="gopage"] {
 	height: 10%;
@@ -93,7 +117,6 @@ div[name="gopage"] {
 	flex-direction: column;
 	justify-content: center;
 }
-
 
 #mobileNetCanvas,
 #clipping {
@@ -110,11 +133,10 @@ div[name="gopage"] {
 	overflow: auto;
 }
 
-#post_contents li{
+#post_contents li {
 	border: 1px solid #53d6ff;
 	/* アイコン_ピンクシャドウ */
 	box-shadow: 2px 2px 0px #ff53df;
 	border-radius: 12px;
-	
-
+}
 /* テスト */
