@@ -30,6 +30,16 @@ const db = getFirestore(app);
 // ランダムな背景画像を設定する
 setBackGroundImage("./..");
 
+function convertTimestampToDatetime(timestamp) {
+	const _d = timestamp ? new Date(timestamp * 1000) : new Date();
+	const Y = _d.getFullYear();
+	const m = (_d.getMonth() + 1).toString().padStart(2, "0");
+	const d = _d.getDate().toString().padStart(2, "0");
+	const H = _d.getHours().toString().padStart(2, "0");
+	const i = _d.getMinutes().toString().padStart(2, "0");
+	const s = _d.getSeconds().toString().padStart(2, "0");
+	return `${Y}/${m}/${d} ${H}:${i}:${s}`;
+}
 // ラベル名受信処理
 // ーーーーーーーーーーーーーーーーーーーーーー
 // URLを取得
@@ -58,6 +68,7 @@ onSnapshot(docRef, (docSnap) => {
 	// const docSnap = await getDoc(docRef); //docSnapにデータを入れる
 	// console.log(docSnap); //docSnapにはよくわかんない情報が入ってるけど、.data()をつけるとわかりやすく見えるようになる
 
+	const robohashURL = "https://robohash.org/";
 	// 新規か既存か分類
 	if (docSnap.exists()) {
 		console.log("Document data:", docSnap.data());
@@ -69,8 +80,15 @@ onSnapshot(docRef, (docSnap) => {
 		board.forEach((element, i) => {
 			htmlElement += `
 				<li>
-					<div>${element.user_name}</div>
-					<div>${element.text}</div>
+					<div class="boardListImage">
+						<img src="${robohashURL}${element.user_name}">
+					</div>
+					<div class="boardListText">
+						<div class="boardName"><span class="fireName">${
+							element.user_name
+						}</span><span class="fireTime">${convertTimestampToDatetime(element.time.seconds)}</span></div>
+						<div class="boardText">${element.text}</div>
+					</div>
 				</li>
 			`;
 		});
@@ -82,8 +100,13 @@ onSnapshot(docRef, (docSnap) => {
 		console.log("No such document!");
 		$("#post_contents").html(`
 			<li>
-				<div>扉の番人</div>
-				<div>あなたが最初の発見者です。</div>
+			<div class="boardListImage">
+				<img src="${robohashURL}扉の番人">
+			</div>
+			<div class="boardListText">
+				<div class="boardName">扉の番人</div>
+				<div class="boardText">あなたが最初の発見者です。</div>
+			</div>
 			</li>
 		`);
 	}
