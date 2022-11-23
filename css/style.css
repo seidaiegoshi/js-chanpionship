@@ -109,8 +109,11 @@ div[name="camera"] {
 	width: 80%;
 }
 #mainCanvas {
+	/* width: 100%; */
+	/* height: auto; */
 	width: 100%;
-	height: auto;
+	height: calc(100vw * 0.9 * 0.8 * 9 / 16);
+	/* 横幅から、wholeの90%,cameraの80% したやつを、16:9のアスペクトであわせる*/
 }
 #Analyzing {
 	color: white;
