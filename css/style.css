@@ -56,6 +56,10 @@ button {
 	color: #ff53df;
 	filter: drop-shadow(2px 2px 0px #53d6ff);
 }
+.material-symbols-outlined.md-40 {
+	color: #53d6ff;
+	font-size: 40px;
+}
 /* howtouse
 ---------------------- */
 #howtouse {
@@ -66,7 +70,7 @@ button {
 	font-size: 20px;
 	line-height: 30px;
 }
-.howtouse_div{
+.howtouse_div {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -83,10 +87,12 @@ button {
 .howtouse_p {
 	width: 60%;
 }
-a {
-	color:white;
+.howtouse_div a {
+	color: white;
 	text-decoration: none;
-	background: #53D6FF;
+	background: #53d6ff;
+	padding: 5px 10px;
+	filter: drop-shadow(2px 2px 0px #ff53df);
 }
 
 /* camera
@@ -123,13 +129,14 @@ div[name="title"] {
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
+	margin-bottom: 16px;
 }
 div[name="title"] h1 {
 	color: #53d6ff;
 	font-family: "DotGothic16";
 	font-style: normal;
 	font-weight: 400;
-	font-size: 1.3rem;
+	font-size: 2.2rem;
 }
 
 div[name="camera"] {
@@ -139,12 +146,14 @@ div[name="camera"] {
 	justify-content: center;
 	height: 50%;
 	width: 80%;
+	margin-bottom: 16px;
 }
 #mainCanvas {
 	/* width: 100%; */
 	/* height: auto; */
-	width: 100%;
-	height: calc(100vw * 0.9 * 0.8 * 9 / 16);
+	height: 100%;
+	width: auto;
+	/* height: calc(100vw * 0.9 * 0.8 * 9 / 16); */
 	/* 横幅から、wholeの90%,cameraの80% したやつを、16:9のアスペクトであわせる*/
 }
 #Analyzing {
@@ -157,6 +166,7 @@ div[name="result"] {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-bottom: 16px;
 }
 div[name="result"] ul {
 	width: 100%;
