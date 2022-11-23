@@ -56,6 +56,25 @@ button {
 	color: #ff53df;
 	filter: drop-shadow(2px 2px 0px #53d6ff);
 }
+/* howtouse
+---------------------- */
+#howtouse {
+	color: #53d6ff;
+	font-family: "DotGothic16";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 30px;
+}
+
+.howtouse_p {
+	width: 60%;
+}
+a {
+	color:white;
+	text-decoration: none;
+	background: #53D6FF;
+}
 
 /* camera
 ---------------------- */
