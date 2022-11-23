@@ -66,6 +66,19 @@ button {
 	font-size: 20px;
 	line-height: 30px;
 }
+.howtouse_div{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-evenly;
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, 0.7);
+	border: 1px solid #53d6ff;
+	box-shadow: 2px 2px 0px #ff53df;
+	border-radius: 12px;
+	height: 90%;
+	width: 90%;
+}
 
 .howtouse_p {
 	width: 60%;
