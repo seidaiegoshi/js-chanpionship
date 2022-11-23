@@ -171,7 +171,7 @@ document.querySelector("#shutter").addEventListener(
 		toggleStream(); //カメラのON/OFFを切り替える
 		if (cameraIsStop) {
 			// カメラが止まっているとき、
-
+			$("#Analyzing").text("探索中・・・");
 			/* 認識結果を表示 
 			----------------*/
 
@@ -186,7 +186,7 @@ document.querySelector("#shutter").addEventListener(
 				if (tensorflow_judge.length == 0) {
 					$("#Analyzing").text("そこには何も無いようだ。いや、「無」はあるのかもしれない。");
 				} else {
-					$("#Analyzing").text("探索中・・・");
+					$("#Analyzing").text("解析開始...");
 				}
 
 				// オブジェクト認識で使う
@@ -266,6 +266,7 @@ document.querySelector("#shutter").addEventListener(
 							$("#label").val(label);
 							$("#recognitionResults").css("visibility", "visible");
 							$("#goBoard").css("visibility", "visible");
+							$("#Analyzing").text("世界の入り口を見つけた");
 						});
 					});
 				});
