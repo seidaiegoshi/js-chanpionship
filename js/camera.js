@@ -20,7 +20,9 @@ let mobileNetImageArray = [];
 let streamObj = null;
 
 // カメラ
-video = document.createElement("video");
+// video = document.createElement("video");
+const video = document.querySelector("#mainCanvas");
+
 video.setAttribute("autoplay", "");
 video.setAttribute("muted", "");
 video.setAttribute("playsinline", "");
@@ -43,7 +45,9 @@ const constraints = {
 };
 
 // キャンバス
-const canvas = document.querySelector("#mainCanvas");
+// const canvas = document.querySelector("#mainCanvas");
+const canvas = document.createElement("canvas");
+
 const prev = canvas.getContext("2d"); //2Dグラフィックを描画するためのメソッドやプロパティをもつオブジェクトを返す。
 
 // ーーーーーーーーーーーーーーーーーーーーー
